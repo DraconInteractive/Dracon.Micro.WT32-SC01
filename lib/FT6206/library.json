@@ -1,0 +1,15 @@
+{
+    "name":"Adafruit FT6206 Library",
+    "version":"1.0.6",
+    "description": "Arduino library for FT6206-based Capacitive touch screen",
+    "repository":
+    {
+        "type":"git",
+        "url":"https://github.com/sowbug/Adafruit_FT6206_Library.git"
+    },
+    "authors":
+    {
+        "name":"Adafruit",
+        "url":"mailto::info@adafruit.com"
+    }
+}
