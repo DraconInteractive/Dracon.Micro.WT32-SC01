@@ -50,6 +50,7 @@ bool onPress, onRelease;
 void touchupdate();
 void btupdate();
 void btreceive ();
+void btsend_info();
 void btsend_pos ();
 void btsend_state (uint8_t);
 void btsend_message(String);
@@ -59,7 +60,7 @@ void btsend();
 void setup() {
   Serial.begin(115200);
 
-  if (SerialBT.begin("Dracon Touch")) 
+  if (SerialBT.begin("Dracon MicroTouch")) 
   {
     Serial.println("Bluetooth Started. Ready to pair.");
   }
@@ -175,26 +176,34 @@ void btupdate () {
 
 void btreceive () 
 {
+  if (messageIn == "info") {
+    btsend_info();
+  }
   // Add logic based on messageIn
   messageIn = "";
+}
+
+void btsend_info () 
+{
+  messageOut = String(0 + "_Dracon MicroTouch_WT32-SC01");
 }
 
 void btsend_pos () 
 {
   String xM = String(t_x);
   String yM = String(t_y);
-  messageOut = String(0 + "_" + xM + "_" + yM);
+  messageOut = String(1 + "_" + xM + "_" + yM);
+  btsend();
+}
+
+void btsend_message (String message) {
+  messageOut = String (1 + "_" + message);
   btsend();
 }
 
 void btsend_state(uint8_t state)
 {
   messageOut = String(state);
-  btsend();
-}
-
-void btsend_message (String message) {
-  messageOut = String (1 + "_" + message);
   btsend();
 }
 
